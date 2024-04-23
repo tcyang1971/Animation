@@ -7,6 +7,8 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -62,9 +64,19 @@ fun Animation(){
             visible = appear,
             enter = fadeIn(
                 initialAlpha = 0.1f,
-                animationSpec = tween(durationMillis = 5000)),
+                animationSpec = tween(durationMillis = 5000))
+                    + slideInHorizontally(
+                        animationSpec = tween(durationMillis = 5000)
+                    ){ fullWidth ->
+                        fullWidth / 3
+                     },
             exit = fadeOut(
                 animationSpec = tween(durationMillis = 5000))
+                    + slideOutHorizontally(
+                        animationSpec = tween(durationMillis = 5000)
+                    ) { fullWidth ->
+                        fullWidth / 3
+                    }
         ) {
             Image(
                 painter = painterResource(id = R.drawable.sky),
