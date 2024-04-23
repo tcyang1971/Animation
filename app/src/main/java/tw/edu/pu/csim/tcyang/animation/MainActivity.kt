@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -57,6 +60,11 @@ fun Animation(){
 
         AnimatedVisibility(
             visible = appear,
+            enter = fadeIn(
+                initialAlpha = 0.1f,
+                animationSpec = tween(durationMillis = 5000)),
+            exit = fadeOut(
+                animationSpec = tween(durationMillis = 5000))
         ) {
             Image(
                 painter = painterResource(id = R.drawable.sky),
