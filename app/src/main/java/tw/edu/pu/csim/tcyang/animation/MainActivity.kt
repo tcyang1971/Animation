@@ -11,6 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import tw.edu.pu.csim.tcyang.animation.ui.theme.AnimationTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+
+import androidx.compose.foundation.layout.Column
+
+import androidx.compose.material3.Button
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +32,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    //Greeting("Android")
+                    Animation()
                 }
             }
         }
@@ -30,17 +41,22 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun Animation(){
+    var appear by remember { mutableStateOf(true) }  //背景出現
+    var expanded by remember { mutableStateOf(true) }  //背景延展
+    var fly by remember { mutableStateOf(false) }  //火箭升空
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AnimationTheme {
-        Greeting("Android")
+    Column {
+        Button(
+            onClick = { appear = !appear }
+        ) {
+            if (appear) Text(text = "星空背景圖消失")
+            else Text(text = "星空背景圖出現")
+        }
+
+        Image(
+            painter = painterResource(id = R.drawable.sky),
+            contentDescription = "星空背景圖"
+        )
     }
 }
