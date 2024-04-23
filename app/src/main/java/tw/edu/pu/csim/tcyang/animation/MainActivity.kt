@@ -3,6 +3,7 @@ package tw.edu.pu.csim.tcyang.animation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -54,9 +55,14 @@ fun Animation(){
             else Text(text = "星空背景圖出現")
         }
 
-        Image(
-            painter = painterResource(id = R.drawable.sky),
-            contentDescription = "星空背景圖"
-        )
+        AnimatedVisibility(
+            visible = appear,
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.sky),
+                contentDescription = "星空背景圖"
+            )
+        }
+
     }
 }
