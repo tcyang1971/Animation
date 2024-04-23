@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -33,6 +34,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -72,6 +74,12 @@ fun Animation(){
     val backgroundColor by animateColorAsState(
         if (appear) Color.Transparent else Color.Green,
         animationSpec = tween(2000, 500)
+    )
+
+    //大小動畫
+    val rocketSize by animateDpAsState(
+        if (fly) 75.dp else 150.dp,
+        animationSpec = tween(2000)
     )
 
     Column (Modifier.background(backgroundColor)){
@@ -114,6 +122,18 @@ fun Animation(){
                     }
 
             )
+
+            Image(
+                painter = painterResource(id = R.drawable.rocket),
+                contentDescription = "火箭",
+                modifier = Modifier
+                    .size(rocketSize)
+                    .clickable(
+                    ) {
+                        fly = !fly
+                    }
+            )
+
         }
 
     }
